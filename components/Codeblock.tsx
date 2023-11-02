@@ -20,7 +20,7 @@ export default function Codeblock() {
           value={input}
           height="400px"
           theme={okaidia}
-          extensions={[python({ jsx: true })]}
+          extensions={[python()]}
           onChange={onChange}
         />
         <input

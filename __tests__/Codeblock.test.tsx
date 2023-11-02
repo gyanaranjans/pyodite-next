@@ -8,7 +8,12 @@ jest.mock('react-py', () => ({
 }));
 
 jest.mock('@uiw/react-codemirror', () => {
-  return jest.fn().mockImplementation(() => <textarea data-testid="codemirror" />);
+  return jest.fn().mockImplementation(({ value, onChange }) => {
+    React.useEffect(() => {
+      onChange('print("Hello, World!")');
+    }, []);
+    return <textarea data-testid="codemirror" value={value} />;
+  });
 });
 
 describe('Codeblock', () => {
@@ -27,7 +32,6 @@ describe('Codeblock', () => {
     const runButton = getByText('Run');
     const codeMirror = getByTestId('codemirror');
 
-    fireEvent.change(codeMirror, { target: { value: 'print("Hello, World!")' } });
     fireEvent.click(runButton);
 
     await waitFor(() => expect(mockRunPython).toHaveBeenCalledWith('print("Hello, World!")'));

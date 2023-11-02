@@ -8,7 +8,7 @@ export default function Codeblock() {
   const [input, setInput] = React.useState('');
   const { runPython, stdout, stderr, isLoading, isRunning } = usePython();
 
-  const onChange = React.useCallback((val, viewUpdate) => {
+  const onChange = React.useCallback((val: string, viewUpdate: any) => {
     setInput(val);
   }, []);
 

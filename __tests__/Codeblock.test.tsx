@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import Codeblock from './Codeblock';
+import Codeblock from '@/components/Codeblock';
 import { usePython } from 'react-py';
 
 jest.mock('react-py', () => ({

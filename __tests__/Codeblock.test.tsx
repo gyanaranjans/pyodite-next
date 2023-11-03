@@ -12,7 +12,7 @@ jest.mock('@uiw/react-codemirror', () => {
     React.useEffect(() => {
       onChange('print("Hello, World!")');
     }, []);
-    return <textarea data-testid="codemirror" value={value} />;
+    return <textarea data-testid="codemirror" value={value} onChange={()=>{}}/>;
   });
 });
 

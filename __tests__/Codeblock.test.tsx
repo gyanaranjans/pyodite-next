@@ -38,4 +38,46 @@ describe('Codeblock', () => {
 
     expect(getByText('test output')).toBeInTheDocument();
   });
+
+  it('displays loading state correctly', () => {
+    (usePython as jest.Mock).mockReturnValue({
+      runPython: jest.fn(),
+      stdout: '',
+      stderr: '',
+      isLoading: true,
+      isRunning: false,
+    });
+
+    const { getByText } = render(<Codeblock />);
+
+    expect(getByText('Loading...')).toBeInTheDocument();
+  });
+
+  it('displays running state correctly', () => {
+    (usePython as jest.Mock).mockReturnValue({
+      runPython: jest.fn(),
+      stdout: '',
+      stderr: '',
+      isLoading: false,
+      isRunning: true,
+    });
+
+    const { getByText } = render(<Codeblock />);
+
+    expect(getByText('Running...')).toBeInTheDocument();
+  });
+
+  it('displays error correctly', () => {
+    (usePython as jest.Mock).mockReturnValue({
+      runPython: jest.fn(),
+      stdout: '',
+      stderr: 'test error',
+      isLoading: false,
+      isRunning: false,
+    });
+
+    const { getByText } = render(<Codeblock />);
+
+    expect(getByText('test error')).toBeInTheDocument();
+  });
 });
